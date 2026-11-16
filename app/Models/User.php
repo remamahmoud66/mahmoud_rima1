@@ -46,8 +46,15 @@ class User extends Authenticatable
         ];
     }
 
-     public function lecturers()
-    {
+    public function lecturer()
+{
     return $this->hasOne(Lecturers::class);
-    }
+}
+
+public function courses()
+{
+    return $this->belongsToMany(courses::class, 'course_user', 'user_id', 'course_id')
+        ->withPivot(['enrollment_date', 'grade'])
+        ->withTimestamps();
+}
 }
